@@ -22,6 +22,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanityclient";
 import Link from "next/link";
 import NavBarLayout from "@/components/NavBarLayout";
+import { FillingBottle } from "react-cssfx-loading";
 
 const List = ({ authors }) => {
   //  const {authors} = useContext(DataContext)
@@ -40,7 +41,10 @@ const List = ({ authors }) => {
 
       <NavBarLayout/>
 
-      <Box
+        {
+          authors?
+          (
+            <Box
         display={"flex"}
         alignItems="center"
         justifyContent={"center"}
@@ -119,6 +123,14 @@ const List = ({ authors }) => {
           </TableContainer>
         </Box>
       </Box>
+          ) : (
+            <Box display={"flex"} alignItems="center" justifyContent={"center"} minH="100vh" >
+                <FillingBottle duration='3s' color="#008080" />
+            </Box>
+          )
+        }
+
+
     </>
   );
 };
