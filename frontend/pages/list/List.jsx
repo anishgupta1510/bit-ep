@@ -126,12 +126,6 @@ const List = ({ authors }) => {
 export default List;
 
 export async function getStaticProps(context) {
-  const client = createClient({
-    projectId: "yx603k9e",
-    dataset: "production",
-    useCdn: false,
-    apiVersion: '2021-08-31'
-  });
   const authors = await client.fetch(`*[_type == "author"]`);
   return {
     props: {

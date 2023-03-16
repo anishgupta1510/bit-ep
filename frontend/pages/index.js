@@ -9,6 +9,7 @@ import { GetStaticPaths } from "next";
 import MainNav from "@/components/MainNav";
 import { useMediaQuery } from "@chakra-ui/react";
 import NavBarLayout from "@/components/NavBarLayout";
+import { client } from "@/sanityclient";
 const index = ({ auths, posts }) => {
   const {authors,setAuthors,blogs,setBlogs} = useContext(DataContext);
   // console.log(auths)
@@ -47,11 +48,7 @@ const index = ({ auths, posts }) => {
 export default index;
 
 export async function getStaticProps(context) {
-  const client = createClient({
-    projectId: "yx603k9e",
-    dataset: "production",
-    useCdn: false,
-  });
+  
   const auths = await client.fetch(`*[_type == "author"]`);
   const posts = await client.fetch(`*[_type == "post"] | order(_createdAt desc)`);
 

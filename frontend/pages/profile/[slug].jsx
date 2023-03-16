@@ -79,11 +79,6 @@ const profile = ( {data} ) => {
 export default profile
 
 export async function getStaticPaths(context) {
-    const client = createClient({
-        projectId:"yx603k9e",
-        dataset:"production",
-        useCdn:false
-    });
     const authors = await client.fetch(`*[_type == "author"]`)
     const paths = authors.map((ele)=>({params:{slug:ele.slug.current}}))
     // console.log(paths)
@@ -94,12 +89,6 @@ export async function getStaticPaths(context) {
 }
 
 export async function getStaticProps({params}){
-    const client = createClient({
-        projectId:"yx603k9e",
-        dataset:"production",
-        useCdn:false,
-        apiVersion: '2021-08-31'
-    })
     const slug = params.slug
     // console.log("the slug for the given is " + slug)
     const data = await client.fetch(`*[_type == "author" && slug.current == "${slug}"][0]`)
