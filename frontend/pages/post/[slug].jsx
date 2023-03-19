@@ -1,6 +1,6 @@
 import BacktoHome from '@/components/BacktoHome';
 import { client } from '@/sanityclient';
-import { Box, Flex , Text, useMediaQuery , Image, Avatar } from '@chakra-ui/react';
+import { Box, Flex , Text, useMediaQuery , Image, Avatar, SimpleGrid, Heading } from '@chakra-ui/react';
 import { useRouter } from 'next/router'
 import React from 'react'
 import imageUrlBuilder from "@sanity/image-url"
@@ -63,9 +63,35 @@ const post = ({data , authordata}) => {
             {/* <BacktoHome/> */}
             <NavBarLayout/>
 
+            <Box display={"flex"} justifyContent="center" alignItems={"center"} >
+                <Box width={
+                isSmaller?"80vw":"60vw"
+             } display={"flex"} padding={"15px"} >
+
+                    <Link href={`/profile/${authordata.slug.current}`} >
+                        <Image src={urlFor(authordata.image).url()} rounded="full" height={"70px"} width="70px" cursor={"pointer"} /> 
+                    </Link>
+                    <Box display={"flex"} flexDirection="column" alignItems={"center"} justifyContent="center" marginLeft={"5px"} >
+                        <Text fontSize={"lg"} >
+                            {
+                                authordata.name
+                            }
+                        </Text>
+                        <Flex justifyContent={"space-between"} >
+                            <Text color={"grey"} >
+                                {
+                                    formatCreatedAtDate(data._createdAt)
+                                }
+                            </Text>
+                            
+                        </Flex>
+                    </Box>
+            </Box>
+            </Box>
+
             <Box display={"flex"} flexDirection="column" alignItems={"center"} >
 
-                <Box minW={
+                {/* <Box minW={
                     isSmaller?"100vw":"60vw"
                 }
                 padding={
@@ -96,7 +122,9 @@ const post = ({data , authordata}) => {
                         </Text>
                     </Box>
                     </Link>
-                </Box>
+                </Box> */}
+
+                
 
 
                 <Image marginTop={"10"} src={
@@ -104,6 +132,12 @@ const post = ({data , authordata}) => {
                 }  maxW={
                     isSmaller?"90vw":"40vw"
                 } maxHeight="100vh" />
+
+                <Heading margin={"5px"}>
+                    {
+                        data.title
+                    }
+                </Heading>
                 
                 <Box boxShadow={"xs"} width={
                     isSmaller?"80%":"60%"
