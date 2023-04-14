@@ -2,8 +2,14 @@ import { Button, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const MainNav = () => {
+
+  const router = useRouter();
+
+  const {pathname} = router
+
   return (
     <>
       <Flex
@@ -43,12 +49,19 @@ const MainNav = () => {
         </Link>
         <Flex>
           <Link href={"/"}>
-            <Button colorScheme={"green"} marginRight="20px" _hover={{bg:"teal"}} >
+            {
+              (pathname !== '/' )  && <Button colorScheme={"green"} marginRight="20px" _hover={{bg:"teal"}} >
               Home
             </Button>
+            }
           </Link>
           <Link href={"/list/List"}>
-            <Button colorScheme={"green"} _hover={{bg:"teal"}} >List of Authors</Button>
+            <Button colorScheme={"green"} _hover={{bg:"teal"}} marginRight={"20px"} >List of Authors</Button>
+          </Link>
+          <Link href={"/this_week"} >
+              <Button colorScheme="green" _hover={{bg:'teal'}} >
+                  Week Meister
+              </Button>
           </Link>
         </Flex>
       </Flex>
