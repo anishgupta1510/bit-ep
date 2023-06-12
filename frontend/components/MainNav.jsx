@@ -30,6 +30,7 @@ const MainNav = () => {
               justifyContent={"center"}
               alignItems="center"
               marginTop={"5"}
+              backdropFilter={"blur(4px)"}
             >
               <Heading display="flex" flexDirection={"column"}>
                 Epistle

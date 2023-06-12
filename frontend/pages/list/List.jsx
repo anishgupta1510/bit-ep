@@ -35,6 +35,12 @@ const List = ({ authors }) => {
     return builder.image(source);
   }
 
+  if(authors === null){
+    return <>
+      Loading...
+    </>
+  }
+
   return (
     <>
       {/* <BacktoHome /> */}

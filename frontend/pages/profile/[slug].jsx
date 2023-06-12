@@ -7,9 +7,11 @@ import imageUrlBuilder from "@sanity/image-url"
 import { client } from '@/sanityclient'
 import BlockContent from '@sanity/block-content-to-react'
 import NavBarLayout from '@/components/NavBarLayout'
+import { motion } from "framer-motion";
 
 const profile = ( {data} ) => {
     // console.log(data)
+    const MotionBox = motion(Box);
 
     const builder = imageUrlBuilder(client)
     function urlFor(source){
@@ -43,9 +45,17 @@ const profile = ( {data} ) => {
             </Link> 
             </Flex> */}
             <Flex flexDirection={"column"} p="4" alignItems={"center"} justifyContent="center" >
-                <Box display={"flex"} alignItems="center" justifyContent={"center"} >
-                    <Image src={urlFor(data.image).width(250).height(250).url()} alt="author image" rounded={"full"} />
-                </Box>
+                <MotionBox
+                    initial={{ opacity: 0, translateY: 20 }}
+                    animate={{ opacity: 1, translateY: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+
+                    <Box display={"flex"} alignItems="center" justifyContent={"center"} >
+                        <Image src={urlFor(data.image).width(250).height(250).url()} alt="author image" rounded={"full"} />
+                    </Box>
+
+                </MotionBox>
                 <Text color={"grey"} fontSize="3xl" pa="3" >
                     {
                         data.name

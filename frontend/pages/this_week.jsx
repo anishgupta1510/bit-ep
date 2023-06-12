@@ -5,9 +5,9 @@ import React, { useEffect, useState } from 'react'
 import imageUrlBuilder from "@sanity/image-url"
 import Week_heading from '@/components/Week_heading';
 import BlockContent from '@sanity/block-content-to-react'
-
+import {motion} from 'framer-motion'
 const this_week = ( {data} ) => {
-
+    const MotionBox = motion(Box)
     console.log(data[0])
     const  [display_data,set_Display_Data] = useState(data[0]);
     useEffect(()=>{
@@ -46,7 +46,18 @@ const this_week = ( {data} ) => {
                     formatCreatedAtDate(display_data._updatedAt)
                 }
             </Text>
+            {/* <Image src={ urlFor(display_data.image) } height={"70vh"} borderRadius={"20px"} marginTop={"10px"} /> */}
+
+            <MotionBox
+                initial={{ opacity: 0, translateY: 20 }}
+                animate={{ opacity: 1, translateY: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+
             <Image src={ urlFor(display_data.image) } height={"70vh"} borderRadius={"20px"} marginTop={"10px"} />
+
+            </MotionBox>
+
             <Text color={"Highlight"} fontSize={"2xl"} marginTop={"10px"} textDecoration={"underline"} >
                 Week's Description
             </Text>

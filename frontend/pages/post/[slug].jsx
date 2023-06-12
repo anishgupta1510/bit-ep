@@ -6,9 +6,10 @@ import React from 'react'
 import imageUrlBuilder from "@sanity/image-url"
 import Link from 'next/link';
 import NavBarLayout from '@/components/NavBarLayout';
+import { motion } from "framer-motion";
 
 const post = ({data , authordata}) => {
-
+    const MotionBox = motion(Box);
     const builder = imageUrlBuilder(client)
     function urlFor(source){
         return builder.image(source)
@@ -91,47 +92,26 @@ const post = ({data , authordata}) => {
 
             <Box display={"flex"} flexDirection="column" alignItems={"center"} >
 
-                {/* <Box minW={
-                    isSmaller?"100vw":"60vw"
-                }
-                padding={
-                    isSmaller?"5px":"0"
-                }
-                >
-                    <Text fontSize={"4xl"} color={"grey"} display="block" >
-                        {
-                            data.title
-                        }
-                    </Text>
-                    <Text display={"inline"} >
-                        Published On : {formatCreatedAtDate(data._createdAt)}
-                    </Text>
-                    <Text>
-                        Last Updated On : {formatCreatedAtDate(data._updatedAt)}
-                    </Text>
-                    <Text color={"grey"} fontSize="2xl" >
-                        Author
-                    </Text>
-                    <Link href={`/profile/${authordata.slug.current}`} >
-                    <Box height="8vh" alignItems={"center"} display={"inline-block"} boxShadow="xs" bg="whitesmoke" >
-                        <Image src={urlFor(authordata.image).url()} height="100%" display={"inline"} />
-                        <Text margin={"2"} display="inline" fontSize={"3xl"} >
-                            {
-                                authordata.name
-                            }
-                        </Text>
-                    </Box>
-                    </Link>
-                </Box> */}
 
-                
-
-
-                <Image marginTop={"10"} src={
+                {/* <Image marginTop={"10"} src={
                     urlFor(data.mainImage).url()
                 }  maxW={
                     isSmaller?"90vw":"40vw"
-                } maxHeight="100vh" />
+                } maxHeight="100vh" /> */}
+
+                <MotionBox
+                    initial={{ opacity: 0, translateY: 20 }}
+                    animate={{ opacity: 1, translateY: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+
+                    <Image marginTop={"10"} src={
+                        urlFor(data.mainImage).url()
+                    }  maxW={
+                        isSmaller?"90vw":"40vw"
+                    } maxHeight="100vh" />
+
+                </MotionBox>
 
                 <Heading margin={"5px"}>
                     {
